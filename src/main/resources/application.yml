@@ -1,0 +1,33 @@
+server:
+  port: 8080
+logging:
+  level:
+    org:
+      hibernate: ERROR 
+      springframework: 
+        web: INFO
+    root: INFO
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} [%clr(%5p)] %clr(%X{X-B3-TraceId:-}){magenta} %clr(---){faint} %clr(%class{36}){cyan} %clr(:){faint} %msg%n"
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;MODE=Oracle;
+    username: sa
+    password:
+      data: classpath:init.sql
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: update
+        dialect:  org.hibernate.dialect.H2Dialect
+        show_sql: false
+        format_sql: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  h2:
+    console:
+      enabled: true
+      path: /console
